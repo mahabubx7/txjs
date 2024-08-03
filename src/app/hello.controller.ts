@@ -5,7 +5,7 @@ import { Get, Route, Tags } from 'tsoa';
 export class HelloController {
   @Get('/')
   public async getMessage(): Promise<string> {
-    return 'Hello, world';
+    return 'Hello, world!!';
   }
 
   @Get('/greet')

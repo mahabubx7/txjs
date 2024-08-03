@@ -1,3 +1,4 @@
+import { BaseException } from '@/config/exceptions';
 import { NextFunction, Request, Response } from 'express';
 import { ValidateError } from 'tsoa';
 
@@ -12,6 +13,11 @@ export const globalErrHandler = (
     return res.status(422).json({
       message: 'Invalid request!',
       error: err?.fields,
+    });
+  } else if (err instanceof BaseException) {
+    return res.status(err.code).json({
+      message: err.message,
+      error: err.error || null,
     });
   } else {
     res.status(500).json({
