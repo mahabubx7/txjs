@@ -1,10 +1,9 @@
-export interface Todo {
-  _id: string;
+export interface ITodo {
+  id: string;
   title: string;
   completed: boolean;
-  createdAt: string;
-  updatedAt: string;
-  __v?: string | number;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 export type CreateTodoDto = {

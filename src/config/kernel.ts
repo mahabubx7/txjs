@@ -28,8 +28,8 @@ const kernel = (app: Application) => {
   // Security
   app.use(helmet());
   app.use(helmet.hidePoweredBy()); // <== hide 'X-Powered-By' header
-  app.use(helmet.noSniff()); // <== prevent browsers from MIME-sniffing a response away from the declared content-type
-  app.use(helmet.xssFilter()); // <== adds some small XSS protections
+  // app.use(helmet.noSniff()); // <== prevent browsers from MIME-sniffing a response away from the declared content-type
+  // app.use(helmet.xssFilter()); // <== adds some small XSS protections
 
   app.use(json()); // <== enable json body parsing
   app.use(urlencoded({ extended: true })); // <== enable url-encoded body parsing

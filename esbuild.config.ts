@@ -29,7 +29,7 @@ async function esbuildForDev() {
       sourcemap: true,
       minify: false,
       platform: 'node',
-      target: ['es2022'],
+      target: 'es2022',
       format: 'esm',
       packages: 'external',
       define: {
@@ -55,7 +55,7 @@ async function esbuildForProd() {
       sourcemap: true,
       minify: true,
       platform: 'node',
-      target: ['es2022'],
+      target: 'es2022',
       format: 'esm',
       packages: 'external',
       define: {

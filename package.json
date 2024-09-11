@@ -1,6 +1,6 @@
 {
   "name": "txjs",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "type": "module",
   "license": "MIT",
   "scripts": {
@@ -11,8 +11,8 @@
     "tsoa": "tsoa spec && tsoa routes",
     "dev": "npm-run-all tsoa --parallel *:dev",
     "prebuild": "rimraf dist",
-    "build": "yarn tsoa && node esbuild.config.js --build",
-    "build:dev": "node esbuild.config.js --dev",
+    "build": "yarn tsoa && node --loader ts-node/esm esbuild.config.ts --prod",
+    "build:dev": "node --loader ts-node/esm esbuild.config.ts --dev",
     "start:dev": "node --watch dist/main.js",
     "start": "node dist/main.js"
   },
@@ -27,13 +27,14 @@
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "helmet": "^7.1.0",
-    "mongoose": "^8.5.2",
+    "pg": "^8.12.0",
     "pino": "^9.3.2",
     "pino-http": "^10.2.0",
     "pino-pretty": "^11.2.2",
     "reflect-metadata": "^0.2.2",
     "swagger-ui-express": "^5.0.1",
-    "tsoa": "^6.4.0"
+    "tsoa": "^6.4.0",
+    "typeorm": "^0.3.20"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.2",
@@ -51,6 +52,7 @@
     "esbuild": "^0.23.0",
     "npm-run-all": "^4.1.5",
     "prettier": "^3.3.3",
-    "rimraf": "^6.0.1"
+    "rimraf": "^6.0.1",
+    "ts-node": "^10.9.2"
   }
 }
