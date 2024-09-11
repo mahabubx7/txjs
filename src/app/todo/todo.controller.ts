@@ -1,7 +1,7 @@
 import { BadRequestException } from '@/config/exceptions';
-import { isValidObjectId } from 'mongoose';
+import { isValidUuid } from '@utils';
 import { Body, Delete, Get, Path, Post, Put, Route, Tags } from 'tsoa';
-import { CreateTodoDto, Todo, UpdateTodoDto } from './todo.dto';
+import { CreateTodoDto, ITodo, UpdateTodoDto } from './todo.dto';
 import { TodoService } from './todo.service';
 
 @Route('todo')
@@ -10,21 +10,21 @@ export class TodoController {
   private todoService: TodoService = new TodoService();
 
   @Get('/')
-  public async getTodos(): Promise<Todo[]> {
+  public async getTodos(): Promise<ITodo[]> {
     return await this.todoService.getTodos();
   }
 
   @Get('/{id}')
-  public async getTodoById(@Path('id') todoId: string): Promise<Todo | null> {
-    if (!isValidObjectId(todoId))
-      throw new BadRequestException('Invalid ID', {
-        cause: 'ID is not a valid ObjectId',
-      });
+  public async getTodoById(@Path('id') todoId: string): Promise<ITodo | null> {
+    // if (!isValidObjectId(todoId))
+    //   throw new BadRequestException('Invalid ID', {
+    //     cause: 'ID is not a valid ObjectId',
+    //   });
     return await this.todoService.getTodoById(todoId);
   }
 
   @Post('/')
-  public async addTodo(@Body() todo: CreateTodoDto): Promise<Todo> {
+  public async addTodo(@Body() todo: CreateTodoDto): Promise<ITodo> {
     return await this.todoService.addTodo(todo);
   }
 
@@ -34,18 +34,18 @@ export class TodoController {
     @Body() todo: UpdateTodoDto,
   ) {
     // Use the todo parameter here
-    if (!isValidObjectId(todoId))
+    if (!isValidUuid(todoId))
       throw new BadRequestException('Invalid ID', {
-        cause: 'ID is not a valid ObjectId',
+        cause: 'ID is not a valid UUID!',
       });
     return await this.todoService.updateTodo(todoId, todo);
   }
 
   @Delete('/{id}')
   public async deleteTodo(@Path('id') todoId: string) {
-    if (!isValidObjectId(todoId))
+    if (!isValidUuid(todoId))
       throw new BadRequestException('Invalid ID', {
-        cause: 'ID is not a valid ObjectId',
+        cause: 'ID is not a valid UUID!',
       });
     return await this.todoService.deleteTodo(todoId);
   }
